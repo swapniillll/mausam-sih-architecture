@@ -5053,7 +5053,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
     .eval-card h3 { margin:0 0 7px; font:700 14px/1.35 system-ui,sans-serif; }
     .eval-card p { margin:0; color:var(--ms-muted); font:12px/1.6 system-ui,sans-serif; }
     .eval-card .eval-label { display:inline-flex; margin:0 0 10px; padding:5px 8px; border-radius:999px; background:var(--ms-teal-soft); color:var(--ms-teal); font:700 9px/1 system-ui,sans-serif; letter-spacing:.08em; text-transform:uppercase; }
-    .persona-tabs { display:flex; flex-wrap:wrap; gap:8px; margin:18px 0 12px; }
+    .persona-tabs { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:8px; margin:18px 0 12px; }
     .persona-tabs button { padding:9px 12px; border:1px solid var(--ms-line); border-radius:999px; background:var(--ms-surface); color:var(--ms-ink); cursor:pointer; font:600 12px/1 system-ui,sans-serif; }
     .persona-tabs button[aria-pressed="true"] { border-color:var(--ms-teal); background:var(--ms-teal-soft); color:var(--ms-teal); }
     .persona-lens { display:grid; grid-template-columns:180px 1fr; gap:18px; align-items:center; padding:20px; border:1px solid var(--ms-line); border-radius:12px; background:linear-gradient(110deg,var(--ms-teal-soft),var(--ms-surface)); }
@@ -5067,6 +5067,9 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
     .eval-status h3::before { content:""; width:8px; height:8px; border-radius:50%; background:var(--ms-teal); }
     .eval-status.limited h3::before { background:#e1a43c; }
     .eval-status.planned h3::before { background:#8b9ba0; }
+    .imd-milestone { display:grid; grid-template-columns:auto 1fr; gap:14px; align-items:start; margin-top:16px; padding:15px 17px; border:1px solid color-mix(in srgb,var(--ms-teal) 32%,var(--ms-line)); border-radius:11px; background:var(--ms-teal-soft); }
+    .imd-milestone strong { display:inline-flex; white-space:nowrap; padding:7px 9px; border-radius:999px; background:var(--ms-surface); color:var(--ms-teal); font:700 9px/1 system-ui,sans-serif; letter-spacing:.08em; }
+    .imd-milestone p { margin:0; color:var(--ms-ink); font:12px/1.65 system-ui,sans-serif; }
     .eval-status ul { display:grid; gap:8px; margin:0; padding-left:18px; color:var(--ms-muted); font:12px/1.55 system-ui,sans-serif; }
     .eval-qa-tools { display:flex; gap:10px; margin-top:16px; }
     .eval-sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
@@ -5080,7 +5083,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
     .eval-footer { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:12px; padding:5px 2px 25px; color:var(--ms-muted); font:11px/1.5 system-ui,sans-serif; }
     .eval-footer a { color:var(--ms-teal); }
     @media(max-width:800px) { .eval-hero { grid-template-columns:1fr; } .eval-grid,.eval-status-grid { grid-template-columns:1fr; } }
-    @media(max-width:540px) { .persona-lens { grid-template-columns:1fr; } .persona-lens-mark { min-height:70px; } }
+    @media(max-width:540px) { .persona-lens { grid-template-columns:1fr; } .persona-lens-mark { min-height:70px; } .persona-tabs { grid-template-columns:repeat(2,minmax(0,1fr)); } .imd-milestone { grid-template-columns:1fr; } }
   </style>
 
 </head>
@@ -5205,7 +5208,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
         <span class="mausam-eyebrow">SIH 2026 · SIH26076 · Evaluator guide</span>
         <h2 id="evaluator-title">One forecast. Different people. More relevant decisions.</h2>
         <p class="eval-hero-copy">Mausam personalizes the order of weather guidance for a person’s context. The backend ranks eligible cards with deterministic rules; the frontend renders that ranked configuration. Explore the product, then follow the path through the system below.</p>
-        <div class="eval-actions"><a class="eval-button primary" href="https://mausam-sih2-deployment-test.vercel.app/" target="_blank" rel="noopener">Open Mausam app ↗</a><a class="eval-button" href="#persona-lens">See persona lens ↓</a><a class="eval-button" href="#system-architecture">Explore architecture ↓</a></div>
+        <div class="eval-actions"><a class="eval-button primary" href="https://mausam-phi-azure.vercel.app/" target="_blank" rel="noopener">Open Mausam app ↗</a><a class="eval-button" href="#persona-lens">See all 8 personas ↓</a><a class="eval-button" href="#system-architecture">Explore architecture ↓</a></div>
       </div>
       <div class="eval-proof" aria-label="What to look for">
         <article><strong>Eight supported personas</strong><span>Health, fitness, beach, traveler, family, agriculture, commuter and event.</span></article>
@@ -5218,10 +5221,10 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
       <span class="mausam-eyebrow">The differentiator</span><h2 id="persona-lens-title">Same conditions, different attention</h2>
       <p class="mausam-panel-intro">Choose a persona to see how the current engine’s configured card weights change what matters most. This is a rules illustration, not a live forecast or a fabricated ranked result.</p>
       <div class="persona-tabs" role="group" aria-label="Choose a persona lens">
-        <button type="button" data-persona="health" aria-pressed="true">Health</button><button type="button" data-persona="commuter" aria-pressed="false">Commuter</button><button type="button" data-persona="beach" aria-pressed="false">Beach</button>
+        <button type="button" data-persona="health" aria-pressed="true">Health</button><button type="button" data-persona="fitness" aria-pressed="false">Fitness</button><button type="button" data-persona="beach" aria-pressed="false">Beach</button><button type="button" data-persona="traveler" aria-pressed="false">Traveler</button><button type="button" data-persona="family" aria-pressed="false">Family</button><button type="button" data-persona="agriculture" aria-pressed="false">Agriculture</button><button type="button" data-persona="commuter" aria-pressed="false">Commuter</button><button type="button" data-persona="event" aria-pressed="false">Event</button>
       </div>
       <div class="persona-lens" aria-live="polite"><div class="persona-lens-mark" id="persona-mark">PERSONA<br>HEALTH</div><div><h3 id="persona-heading">Health: air quality matters more</h3><p id="persona-copy">For the health persona, the AQI health card carries a 0.90 persona weight. The same signal has a 0.80 weight for commuters, so air-quality context can receive stronger relevance for health-focused users.</p><div class="lens-meta" id="persona-meta">AQI health · configured persona weight 0.90 · deterministic engine input</div></div></div>
-      <p class="eval-note">Weights describe relative relevance in the repository’s current configuration. They are not a prediction, health recommendation, or claim that one card always appears first; eligibility, urgency, confidence and warning rules also affect the result.</p>
+      <p class="eval-note">Weights describe relative relevance in the repository’s current configuration; the scoring module describes them as design placeholders, not final tuned values. They are not a prediction, health recommendation, or claim that one card always appears first; eligibility, urgency, confidence and warning rules also affect the result.</p>
     </section>
 
     <section class="mausam-section-head" id="system-architecture" aria-labelledby="system-title">
@@ -5774,10 +5777,11 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
       <section class="mausam-panel" id="evaluator-status" aria-labelledby="status-title">
         <span class="mausam-eyebrow">Transparent scope</span><h2 id="status-title">What is built—and what is still a boundary</h2>
         <p class="mausam-panel-intro">Status below reflects the project README and implementation checked for this guide. Fixture-backed and proposed capabilities are called out directly.</p>
+        <div class="imd-milestone"><strong>IMD ACCESS APPROVED</strong><p>The team reports its official approval letter is in place and API-key generation can proceed. That clears the access milestone. In the latest checked repository, warning scenarios still come from fixtures; the key must be issued, connected to an adapter and verified against live responses before the app is described as using a live IMD feed.</p></div>
         <div class="eval-status-grid">
           <article class="eval-status"><h3>Implemented</h3><ul><li>Deterministic persona-aware ranking for eight personas, with a P0 severe-warning override.</li><li>Explain endpoint, Firebase authentication, saved preferences and PostgreSQL signal cache.</li><li>Next.js interface, interactive map, conversational chat and persona insights.</li><li>OSRM route support in the commuter/traveler experience.</li></ul></article>
           <article class="eval-status limited"><h3>Limited or fixture-backed</h3><ul><li>Warnings and marine/agriculture data include fixtures; do not treat every alert as a live official feed.</li><li>Selected provider data uses cache or fixture fallbacks.</li><li>Offline support exists but ranked homepage recovery remains partial.</li><li>Chat and persona insights use a separate Groq path; they do not rank cards.</li></ul></article>
-          <article class="eval-status planned"><h3>Future scope</h3><ul><li>Official IMD primary telemetry integration.</li><li>SMS notifications and expanded multi-day event planning.</li><li>More complete offline-first handling for ranked homepage data.</li><li>Optional project-only evaluator chatbot; this page uses curated answers for a fast, reliable demo.</li></ul></article>
+          <article class="eval-status planned"><h3>Next steps</h3><ul><li>Generate and configure the approved IMD API key, connect the feed, then validate provenance and live responses.</li><li>SMS notifications and expanded multi-day event planning.</li><li>More complete offline-first handling for ranked homepage data.</li><li>Optional project-only evaluator chatbot; this page uses curated answers for a fast, reliable demo.</li></ul></article>
         </div>
       </section>
 
@@ -5790,7 +5794,8 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
           <details><summary>Does AI decide which weather card is important?</summary><p>No. The homepage ranking and P0 warning override use deterministic backend rules. Groq is used by separate chat and persona-insight routes to produce natural-language responses.</p></details>
           <details><summary>How does the frontend handle the ranking?</summary><p>The FastAPI backend returns the ranked configuration. The Next.js frontend renders that returned order and does not rerank the recommendations locally.</p></details>
           <details><summary>What happens to a severe warning?</summary><p>When a severe-warning item is present, the engine applies a hard P0 priority rule that bypasses persona scoring. Actual warning coverage depends on the data available; the repository documents warning fixtures.</p></details>
-          <details><summary>Are all weather and alert sources live?</summary><p>No. Open-Meteo AQI/UV and Nominatim geocoding are listed as integrations; selected signals can use caches or fixtures. Warnings and marine/agriculture feeds are fixture-backed in the checked project documentation.</p></details>
+          <details><summary>Does Mausam already use a live IMD feed?</summary><p>The team reports that the official approval letter is received and API-key generation can proceed. The latest checked repository still reads warning scenarios from fixtures, so the guide marks IMD as approved access with integration pending—not a live feed in the deployed app. Once the key is issued and the adapter is connected and verified, this status can be updated.</p></details>
+          <details><summary>Are the other weather and alert sources live?</summary><p>Open-Meteo AQI/UV and Nominatim geocoding are listed as integrations; selected signals can use caches or fixtures. Warning and marine/agriculture data still include fixtures in the checked implementation.</p></details>
           <details><summary>What is not complete yet?</summary><p>The project documents official IMD primary telemetry, SMS alerts, broader multi-day event support and fully reliable offline ranked-card recovery as future or incomplete work.</p></details>
           <details><summary>Where can I try the product?</summary><p>Use the “Open Mausam app” button near the top of this page. It opens the currently deployed Vercel preview in a new tab. This evaluator guide is a separate, static architecture and project explainer.</p></details>
         </div>
@@ -5805,9 +5810,14 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
   <script>
     (function () {
       var personaData = {
-        health: { mark: 'PERSONA<br>HEALTH', heading: 'Health: air quality matters more', copy: 'For the health persona, the AQI health card carries a 0.90 persona weight. The same signal has a 0.80 weight for commuters, so air-quality context can receive stronger relevance for health-focused users.', meta: 'AQI health · configured persona weight 0.90 · deterministic engine input' },
-        commuter: { mark: 'PERSONA<br>COMMUTER', heading: 'Commuter: rain and visibility count', copy: 'The rain-commute card has a configured 0.98 persona weight for commuters. The engine also has commuter-specific visibility and traffic advisory cards, making travel context part of the ranking inputs.', meta: 'Rain commute · configured persona weight 0.98 · visibility and traffic cards' },
-        beach: { mark: 'PERSONA<br>BEACH', heading: 'Beach: UV exposure gets more weight', copy: 'The UV sun-exposure card has a configured 0.95 persona weight for beach users. The engine also includes marine-condition cards, although marine data may be fixture-backed.', meta: 'UV sun exposure · configured persona weight 0.95 · marine data may use fixtures' }
+        health: { mark: 'PERSONA<br>HEALTH', heading: 'Health: air quality matters more', copy: 'The health persona gives the AQI health card a configured 0.90 weight. That puts air-quality context near the center of this persona’s ranking inputs.', meta: 'AQI health · configured persona weight 0.90' },
+        fitness: { mark: 'PERSONA<br>FITNESS', heading: 'Fitness: activity windows rise', copy: 'The fitness persona gives activity-window guidance a configured 0.95 weight, with UV exposure weighted at 0.90. Workout timing and outdoor conditions become relevant ranking inputs.', meta: 'Activity window · configured persona weight 0.95 · UV 0.90' },
+        beach: { mark: 'PERSONA<br>BEACH', heading: 'Beach: UV and marine conditions', copy: 'UV exposure and marine-condition alerts both have configured 0.95 weights for the beach persona. Marine data may still use fixtures in this version.', meta: 'UV exposure · 0.95 · marine alert · 0.95' },
+        traveler: { mark: 'PERSONA<br>TRAVELER', heading: 'Traveler: broad conditions and destination', copy: 'The traveler persona weights general weather conditions at 0.95 and destination alerts at 0.95. Packing guidance also has a dedicated traveler weight.', meta: 'General conditions · 0.95 · destination alert · 0.95' },
+        family: { mark: 'PERSONA<br>FAMILY', heading: 'Family: commute and safety context', copy: 'Rain-commute guidance has a configured 0.95 weight for families. A compound driving hazard has a 1.00 weight and can raise safety-related context.', meta: 'Rain commute · 0.95 · compound driving hazard · 1.00' },
+        agriculture: { mark: 'PERSONA<br>AGRICULTURE', heading: 'Agriculture: rain and field advisories', copy: 'The agriculture persona weights rain-commute context at 0.98 and agriculture advisories at 0.95. Current marine/agriculture data limitations are called out below.', meta: 'Rain context · 0.98 · agriculture advisory · 0.95' },
+        commuter: { mark: 'PERSONA<br>COMMUTER', heading: 'Commuter: rain and visibility count', copy: 'Rain-commute guidance has a configured 0.98 weight, while commuter visibility has a 0.95 weight. Both can shape the backend ranking inputs.', meta: 'Rain commute · 0.98 · visibility · 0.95' },
+        event: { mark: 'PERSONA<br>EVENT', heading: 'Event: outlook and timing', copy: 'The event persona weights event outlook at 0.95 and activity windows at 0.90. Rain context also has a 0.98 configured weight for this persona.', meta: 'Event outlook · 0.95 · activity window · 0.90' }
       };
       document.querySelectorAll('[data-persona]').forEach(function (button) {
         button.addEventListener('click', function () {
